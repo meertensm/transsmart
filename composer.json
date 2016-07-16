@@ -1,0 +1,24 @@
+{
+    "name": "mcs/transsmart",
+    "description": "Library to interface with the Transsmart SOAP-Webservice",
+    "license": "MIT",
+    "keywords": ["transsmart"],
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Michiel Meertens",
+            "email": "meertensmichiel28@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">= 5.4",
+        "symfony/var-dumper": "*",
+        "filp/whoops": "*"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "MCS\\": "src"
+        }
+    }
+}
