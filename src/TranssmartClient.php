@@ -84,9 +84,10 @@ class TranssmartClient{
         $result = curl_exec($ch);
         
         if (!curl_errno($ch)) {
-            switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            switch ($http_code) {
                 case 400:  # OK
-                    throw new Exception($result);
+                    throw new Exception(json_decode($result, true)[0]);
                     break;
                 case 401;
                     throw new Exception('Unauthorized');
