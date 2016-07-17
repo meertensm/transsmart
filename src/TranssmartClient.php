@@ -87,6 +87,7 @@ class TranssmartClient{
             $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             switch ($http_code) {
                 case 400:  // Bad request
+                case 500:  // Technical error
                     throw new TranssmartException([
                         'response_code' => $http_code,
                         'body' => $json
