@@ -1,6 +1,6 @@
 {
     "name": "mcs/transsmart",
-    "description": "Library to interface with the Transsmart SOAP-Webservice",
+    "description": "Library to interface with the Transsmart REST-Webservice",
     "license": "MIT",
     "keywords": ["transsmart"],
     "minimum-stability": "dev",
@@ -11,9 +11,7 @@
         }
     ],
     "require": {
-        "php": ">= 5.4",
-        "symfony/var-dumper": "*",
-        "filp/whoops": "*"
+        "php": ">= 5.4"
     },
     "require-dev": {},
     "autoload": {

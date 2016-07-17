@@ -3,7 +3,7 @@ namespace MCS;
 
 use DateTime;
 use Exception;
-use SoapClient;
+use MCS\TranssmartException;
 
 class TranssmartClient{
         
@@ -80,22 +80,30 @@ class TranssmartClient{
         
         $ch = curl_init();
         curl_setopt_array($ch, $curl_options);
+        $json = curl_exec($ch);
         
-        $result = curl_exec($ch);
         
         if (!curl_errno($ch)) {
             $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             switch ($http_code) {
-                case 400:  # OK
-                    throw new Exception($result);
+                case 400:  // Bad request
+                    throw new TranssmartException([
+                        'response_code' => $http_code,
+                        'body' => $json
+                    ]);
+                    return false;
                     break;
-                case 401;
+                case 401; // Unauthorized
                     throw new Exception('Unauthorized');
+                    return false;
+                case 404; // Not found
+                    throw new Exception('Not Found');
+                    return false;
                     break;
             }
         }
         
-        return json_decode($result, true);
+        return json_decode($json, true);
   
     }
     
@@ -122,7 +130,4 @@ class TranssmartClient{
         );
         
     }
-    
-  
-    
 }

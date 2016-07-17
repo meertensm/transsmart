@@ -3,7 +3,6 @@ namespace MCS;
 
 use DateTime;
 use Exception;
-use SoapClient;
 
 class TranssmartShipment{
         
@@ -56,6 +55,7 @@ class TranssmartShipment{
         ], $this);
         
         if (is_array($document)) {
+            
             if (isset($document['Status']) && $document['Status'] == 'NEW') {
                 
                 $label_response = $this->client->getDoLabel([
@@ -89,10 +89,7 @@ class TranssmartShipment{
                 
                 return $response;
             }
-        }
-        
-       // dump($result);
-        
+        } 
     }
     
     public function addParcel($array)
@@ -116,10 +113,7 @@ class TranssmartShipment{
             }
         }
         
-        $this->ColliInformation[] = $new_parcel;
-        
-        
-        
+        $this->ColliInformation[] = $new_parcel;   
     }
     
     public function __set($property, $value)
@@ -141,8 +135,5 @@ class TranssmartShipment{
                     $this->{$property} = $value;
                 }
         }
-    }
-    
-    
-    
+    }    
 }
