@@ -61,6 +61,17 @@ class TranssmartClient{
         
         if (!is_null($body)) {
             if (is_object($body) || is_array($body)) {
+				if (is_array($body)) {
+					if (isset($body['CarrierProfileId'])) {
+						unset($body['CarrierId']);		
+						unset($body['ServiceLevelTimeId']);								
+					}
+				} else {
+					if (isset($body->CarrierProfileId)) {
+						unset($body->CarrierId);		
+						unset($body->ServiceLevelTimeId);								
+					}
+				}
                 $body = json_encode($body);    
             }
             $curl_options[CURLOPT_POSTFIELDS] = $body;
@@ -81,7 +92,6 @@ class TranssmartClient{
         $ch = curl_init();
         curl_setopt_array($ch, $curl_options);
         $json = curl_exec($ch);
-        
         
         if (!curl_errno($ch)) {
             $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
