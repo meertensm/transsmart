@@ -11,6 +11,7 @@ class TranssmartShipment{
     public $Reference;
     public $CarrierId;
     public $ServiceLevelTimeId;
+    public $CarrierProfileId;
     public $CostCenterId;
     public $AddressName;
     public $AddressStreet;
@@ -125,6 +126,7 @@ class TranssmartShipment{
             case 'CarrierId':
             case 'ServiceLevelTimeId':
             case 'CostCenterId':
+            case 'CarrierProfileId':
                 $this->{$property} = (int) $value;
                 break;
             default:
