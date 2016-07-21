@@ -129,7 +129,10 @@ class TranssmartShipment{
                 $this->{$property} = (int) $value;
                 break;
             default:
-                if (substr($property, 0, 7) != 'Address') {
+                if (substr($property, -6) == 'Pickup') {
+                    $this->{$property} = $value;
+                }
+                else if (substr($property, 0, 7) != 'Address') {
                     $property = 'Address' . $property;       
                 }
                 if (property_exists($this, $property)) {
