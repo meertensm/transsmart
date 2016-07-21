@@ -9,10 +9,6 @@ class TranssmartShipment{
     private $client;
     
     public $Reference;
-    public $CarrierId;
-    public $ServiceLevelTimeId;
-    public $CarrierProfileId;
-    public $CostCenterId;
     public $AddressName;
     public $AddressStreet;
     public $AddressStreetNo;
@@ -57,7 +53,7 @@ class TranssmartShipment{
         
         if (is_array($document)) {
             
-            if (isset($document['Status']) && $document['Status'] == 'NEW') {
+            if (isset($document['Status']) && in_array($document['Status'], ['NEW', 'BOOK'])) {
                 
                 $label_response = $this->client->getDoLabel([
                     'id' => $document['Id'],
@@ -123,10 +119,13 @@ class TranssmartShipment{
             case 'Reference':
                 $this->Reference = $value;
                 break;
-            case 'CarrierId':
-            case 'ServiceLevelTimeId':
+            case 'RefOrder':
+                $this->RefOrder = $value;
+                break;    
+            case 'CarrierId':            
             case 'CostCenterId':
             case 'CarrierProfileId':
+            case 'ServiceLevelTimeId':
                 $this->{$property} = (int) $value;
                 break;
             default:
